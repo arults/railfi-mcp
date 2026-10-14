@@ -1,14 +1,42 @@
 # RailFi MCP
 
-Non-custodial, free MCP server for agent-safe stablecoin payout plans.
+Free, non-custodial MCP server for agent-safe stablecoin payout plans.
 
-- Endpoint (streamable HTTP, JSON-RPC, protocol 2025-06-18): https://railfi.xyz/api/mcp
-- A2A card: https://railfi.xyz/.well-known/agent-card.json
-- Web app: https://railfi.xyz/plans
+RailFi helps teams (and agents) turn invoice/payout rows into a **bounded payout-run draft** the owner approves once in their own wallet. Tools validate plans and reconcile transfers; they **never hold funds or keys** and **do not execute payments**.
+
+## Endpoints
+
+| What | URL |
+|------|-----|
+| MCP (streamable HTTP, JSON-RPC, protocol `2025-06-18`) | https://railfi.xyz/api/mcp |
+| A2A agent card | https://railfi.xyz/.well-known/agent-card.json |
+| Web app (plans) | https://railfi.xyz/plans |
+| Early-bird beta | https://railfi.xyz/beta |
 
 ## Tools
-- `create_payout_plan` – validate recipients, budget and time window; returns an approve-once pack the owner approves in their own wallet.
-- `validate_payout_plan` – check a plan without creating an export.
-- `reconcile_payouts` – mark lines paid (tx hash) / skipped and report progress.
 
-RailFi never holds funds or keys and does not execute payments. A2A message/send is not implemented. Rate limit: 60 req/min/IP.
+| Tool | Use when |
+|------|----------|
+| `create_payout_plan` | You need to validate recipients, amounts, total budget and time window, then export an approve-once pack for the owner's wallet |
+| `validate_payout_plan` | You want to check a plan without creating an export |
+| `reconcile_payouts` | Transfers landed and you need to mark lines paid (tx hash) or skipped and report progress |
+
+## Install / connect (remote)
+
+Point any MCP client that supports remote streamable HTTP at:
+
+```text
+https://railfi.xyz/api/mcp
+```
+
+No API key. No OAuth. Rate limit: 60 requests/min/IP.
+
+## Honesty
+
+- Non-custodial: you sign in your own wallet; RailFi never holds private keys or balances.
+- A2A `message/send` is **not** implemented.
+- Software only — not a money transmitter, bank, or custodian. No token. No tax/legal/investment advice.
+
+## Contact
+
+info@railfi.xyz · https://railfi.xyz
